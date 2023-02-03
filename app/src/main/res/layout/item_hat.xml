@@ -1,0 +1,20 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvHatItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="25dp"
+    app:cardBackgroundColor="#B7B7B7"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="5dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:padding="25dp"
+        android:text="Placeholder" />
+
+</androidx.cardview.widget.CardView>
