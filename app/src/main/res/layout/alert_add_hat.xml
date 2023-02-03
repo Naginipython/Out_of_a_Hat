@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvAlertTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="16dp"
+        android:text="Add Hat"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAlertDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Type a name for the new Hat:"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/etAddHat"
+        app:layout_constraintTop_toBottomOf="@+id/tvAlertTitle" />
+
+    <EditText
+        android:id="@+id/etAddHat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Name"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAlertDesc" />
+
+    <TextView
+        android:id="@+id/tvAlertAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="Add hat"
+        android:textSize="20sp"
+        android:textColor="#C700FF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvAlertCancel"
+        app:layout_constraintTop_toBottomOf="@+id/etAddHat" />
+
+    <TextView
+        android:id="@+id/tvAlertCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Cancel"
+        android:textColor="#C700FF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAlertAdd"
+        app:layout_constraintEnd_toStartOf="@+id/tvAlertAdd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etAddHat" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
