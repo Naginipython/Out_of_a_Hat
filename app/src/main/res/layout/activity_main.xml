@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:contentDescription="Add Hat"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="centerCrop"
