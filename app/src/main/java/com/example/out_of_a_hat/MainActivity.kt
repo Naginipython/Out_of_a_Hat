@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 val position = viewHolder.absoluteAdapterPosition
                 hatList.removeAt(position)
                 rvMain.adapter?.notifyItemRemoved(position)
+                saveHats(hatList)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
