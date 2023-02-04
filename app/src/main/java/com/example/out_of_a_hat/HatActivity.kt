@@ -1,14 +1,18 @@
 package com.example.out_of_a_hat
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.out_of_a_hat.databinding.ActivityHatBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlin.random.Random
 
 class HatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHatBinding
@@ -27,10 +31,23 @@ class HatActivity : AppCompatActivity() {
         val hats: List<Hats> = receiveItems(data)
         Log.d("What data did I get?", hats[pos].toString())
 
-        //Setting up Recyler View
+        //Setting up Recycler View
         val rview = binding.recyclerView
         rview.layoutManager = LinearLayoutManager(this)
         rview.adapter = HatItemAdapter(hats[pos].items)
+
+        //Deleting Hat Items
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.absoluteAdapterPosition
+                hats[pos].items.removeAt(position)
+                rview.adapter?.notifyItemRemoved(position)
+                saveHats(hats)
+                //TODO("AWARE OF BUG WHERE UPDATE DOESN'T GO WITH BACK BUTTON")
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(rview)
 
         //Buttons
         binding.btnAddItem.setOnClickListener {
@@ -40,6 +57,17 @@ class HatActivity : AppCompatActivity() {
             saveHats(hats)
         }
         //TODO("ADD SHUFFLE BUTTON, WITH ALERT THAT POPS UP ONE ITEM")
+        binding.btnShuffle.setOnClickListener {
+            val rng = Random.nextInt(hats[pos].items.size)
+            Log.d("Testing random", rng.toString())
+            val alert = AlertDialog.Builder(this)
+                .setMessage("${hats[pos].items[rng]}")
+                .setNegativeButton("Dismiss") { _, _ ->
+                    Log.d("Shuffle Alert", "User Dismissed")
+                }
+                .create()
+            alert.show()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
