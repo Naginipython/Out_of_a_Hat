@@ -1,7 +1,6 @@
 package com.example.out_of_a_hat
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.out_of_a_hat.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -43,6 +44,16 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("EXTRA_TEST_ITEMS", Gson().toJson(it))
             startActivity(intent)
         }
+
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.absoluteAdapterPosition
+                hatList.removeAt(position)
+                rvMain.adapter?.notifyItemRemoved(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(rvMain)
 
         //FAB Button
         binding.fabAddHat.setOnClickListener {
