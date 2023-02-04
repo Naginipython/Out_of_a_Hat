@@ -41,10 +41,12 @@ class MainActivity : AppCompatActivity() {
         //Setting the closure for each hat
         hatAdapter.onItemClick = {
             val intent = Intent(this, HatActivity::class.java)
-            intent.putExtra("EXTRA_TEST_ITEMS", Gson().toJson(it))
+            intent.putExtra("EXTRA_HAT_LIST", Gson().toJson(hatList))
+            intent.putExtra("EXTRA_HAT_POS", hatList.indexOf(it))
             startActivity(intent)
         }
 
+        //Deleting Hats
         val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
@@ -99,6 +101,4 @@ class MainActivity : AppCompatActivity() {
             mutableListOf()
         }
     }
-
-    //TODO("MENU ITEM THAT HELPS REMOVE HATS")
 }

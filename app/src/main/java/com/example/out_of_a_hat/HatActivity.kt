@@ -22,39 +22,48 @@ class HatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //Getting data from previous activity
-        val data = intent.getStringExtra("EXTRA_TEST_ITEMS")
-        val hat: Hats = receiveItems(data)
-        Log.d("What data did I get?", hat.toString())
+        val data = intent.getStringExtra("EXTRA_HAT_LIST")
+        val pos = intent.getIntExtra("EXTRA_HAT_POS", -1)
+        val hats: List<Hats> = receiveItems(data)
+        Log.d("What data did I get?", hats[pos].toString())
 
         //Setting up Recyler View
         val rview = binding.recyclerView
         rview.layoutManager = LinearLayoutManager(this)
-        rview.adapter = HatItemAdapter(hat.items)
+        rview.adapter = HatItemAdapter(hats[pos].items)
 
+        //Buttons
+        binding.btnAddItem.setOnClickListener {
+            val txt = binding.etAddItem.text.toString()
+            hats[pos].items.add(txt)
+            rview.adapter?.notifyItemInserted(hats[pos].items.size-1)
+            saveHats(hats)
+        }
         //TODO("ADD SHUFFLE BUTTON, WITH ALERT THAT POPS UP ONE ITEM")
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_hat_menu, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.tvItem -> {}
             android.R.id.home -> finish()
         }
         return true
     }
 
-    private fun receiveItems(data: String?): Hats {
+    private fun receiveItems(data: String?): List<Hats> {
         return if (data != "") {
-            val type = object : TypeToken<Hats>() {}.type
-            val list = Gson().fromJson<Hats>(data, type)
+            val type = object : TypeToken<List<Hats>>() {}.type
+            val list = Gson().fromJson<List<Hats>>(data, type)
             list
         } else
-            Hats("Error", mutableListOf("Error"))
+            mutableListOf<Hats>(Hats("Error", mutableListOf("Error")))
     }
 
-    //TODO("CREATE SAVE AND RESTORE FOR HAT ITEM DATA")
+    private fun saveHats(hatList: List<Hats>) {
+        val save = applicationContext.getSharedPreferences("hats", 0)
+        save.edit().also {
+            it.putString("hatsString", Gson().toJson(hatList))
+            Log.d("Saved Data: ", hatList.toString())
+            it.apply()
+        }
+    }
 }
