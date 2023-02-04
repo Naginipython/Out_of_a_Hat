@@ -22,6 +22,6 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add"/>
+        app:srcCompat="@drawable/ic_add_dark"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
