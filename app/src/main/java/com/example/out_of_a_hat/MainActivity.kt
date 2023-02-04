@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         hatList.addAll(recoverHats())
 
         val rvMain = binding.rvMain
+        //TODO("MAKE A BETTER MAIN LAYOUT")
 //        rvMain.hasFixedSize()
 //        val grid = GridLayoutManager(this, 2)
 //        rvMain.layoutManager = grid

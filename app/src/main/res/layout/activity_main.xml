@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+<!--    TODO("USE GUIDELINES TO MAKE THESE 50%?")-->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddHat"
         android:layout_width="wrap_content"
